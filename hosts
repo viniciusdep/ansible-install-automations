@@ -1,0 +1,2 @@
+[ubuntu]
+172.27.197.165 ansible_connection=local

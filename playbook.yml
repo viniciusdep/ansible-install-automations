@@ -1,0 +1,8 @@
+---
+- name: Default Playbook - Starting Environment
+  hosts: ubuntu
+  gather_facts: false
+  become: yes
+  roles: 
+    - common
+...
