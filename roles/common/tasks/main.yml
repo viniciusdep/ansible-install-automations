@@ -23,5 +23,12 @@
       - ca-certificates
       - unzip
 
+- name: Baixando AWSCLI 2
+  command: curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip
 
+- name: Extraindo Aquivo AWSCLI 2
+  command: unzip awscliv2.zip
+
+- name: Instalando AWSCLI 2
+  command: ./aws/install
 ...
