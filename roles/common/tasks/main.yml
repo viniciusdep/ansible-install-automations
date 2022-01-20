@@ -22,6 +22,22 @@
       - apt-transport-https 
       - ca-certificates
       - unzip
+      - golang
+      - mtr
+      - ipcalc
+      - mysql-client
+      - bash-completion
+      - nmap 
+      - httpie 
+      - git 
+      - maven 
+      - lftp 
+      - consul 
+      - packer 
+      - whois 
+      - remmina 
+      - dnsutils 
+      - clusterssh
 
 - name: Baixando AWSCLI 2
   command: curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip
@@ -31,4 +47,36 @@
 
 - name: Instalando AWSCLI 2
   command: ./aws/install
+
+- name: Baixando YQ
+  command: wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+
+- name: Alterando Permissoes YQ 
+  command: chmod a+x /usr/local/bin/yq
+
+- name: Clonando Repositórios
+  command: git clone git@bitbucket.org:"{{ item }}"
+  with_items:
+    - zenvia-sms/chef-repo-zenvia.git ~/projects/chef-repo-zenvia
+    - zenvia-sms/chef-repo-zenvia-zcc.git ~/projects/chef-repo-zenvia-zcc
+    - org:zenvia-sms/chef-zenvia-base.git ~/projects/cookbooks/zenvia-base
+    - zenvia-sms/chef-zenvia-utils.git ~/projects/cookbooks/zenvia-utils
+    - zenvia-sms/chef-zenvia_app.git ~/projects/cookbooks/zenvia_app # chef repo antigo
+    - zenvia-sms/chef-zenvia_app.git ~/projects/cookbooks/zenvia_app
+    - zenvia-sms/chef-zenvia-zabbix.git ~/projects/cookbooks/zenvia-zabbix
+    - zenvia-sms/chef-zenvia_consul.git ~/projects/cookbooks/zenvia_consul
+    - zenvia-sms/zenvia-certificados.git ~/projects/repos/zenvia-certificados
+    - zenvia-sms/zenvia-certificados-letsencrypt.git ~/projects/repos/zenvia-certificados-letsencrypt
+    - zenvia-sms/zenvia-docker-repo.git ~/projects/repos/zenvia-docker-repo
+    - zenvia-sms/zenvia-haproxy-repo.git ~/projects/repos/zenvia-haproxy-repo
+    - zenvia-sms/zenvia-zabbix-repo.git ~/projects/repos/zenvia-zabbix-repo
+    - zenvia-sms/chef-zenvia-keepalived.git ~/projects/cookbooks/zenvia-keepalived
+    - zenvia-chatbots/zenvia-kubernetes-util.git ~/projects/zenvia-kubernetes-util
+
+- name: Baixando ChefDK V3.1.0
+  command: wget https://packages.chef.io/files/stable/chefdk/3.1.0/ubuntu/18.04/chefdk_3.1.0-1_amd64.deb
+
+- name: Instalando ChefDK
+  command: sudo dpkg -i chefdk_3.1.0-1_amd64.deb
+
 ...
